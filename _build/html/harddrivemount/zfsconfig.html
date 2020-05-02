@@ -1,0 +1,297 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ZFS Configuration &mdash; Soda Foundation  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Nat Network" href="../nat-network/nat.html" />
+    <link rel="prev" title="An Introduction To The ZFS File System(zfs) For Lunix" href="zfsintro.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Soda Foundation
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../zfs/typeofraids/raid.html">Type Of RAIDs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lunixfile.html">From Hard Drive To Mount Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zfsintro.html">An Introduction To The ZFS File System(zfs) For Lunix</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ZFS Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nat-network/nat.html">Nat Network</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Soda Foundation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>ZFS Configuration</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/harddrivemount/zfsconfig.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="zfs-configuration">
+<h1>ZFS Configuration<a class="headerlink" href="#zfs-configuration" title="Permalink to this headline">¶</a></h1>
+<ol class="arabic">
+<li><p class="first">First set up ZFS by installing it:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>example@example~ sudo apt-get repository ppa:zfs-native/stable
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Now run the following command:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>example@example~ sudo apt update
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Finally install file system by command:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>example@example~ sudo apt-get install -y ubuntu-zfs
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">The ZFS module are not loaded. Try running ‘/sbin/modprobe zfs’ as a root to load them:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>example@example~ sudo /sbin/modprobe zfs
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Start by taking two of our hard disks and putting them in a storage pool by running the following command:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>example@example~ sudo zpool create -f datapool /devs/sdb /dev /sdc
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">zpool create is the command used to create a new storage pool, -f overrides any error that occur(such as if the disk(s) already have information on them), datapool is the name of the storage pool, and /dev/sdb /dev /sdc are the hard drive we put in the pool.</p>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Run df -h check the zpool is created or not:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>example@example~ df -h
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Check status:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>example@example~ sudo zpool status
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Create a dataset:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>example@example~ sudo zfs create datapool/datreon
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Set mountpoint by using following command:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>example@example~ Sudo zfs <span class="nb">set</span> <span class="nv">mountpoint</span><span class="o">=</span>/home/datreon datapool/datreon
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Add user to the system by following command:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>example@example~ sudo useradd -d /home/datreon -s /bin/bash/datreon datreon
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Change ownership the command:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>example@example~ sudo chown -R datreon:datreon /home/datreon
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Set desired password:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>example@example~ sudo password
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../nat-network/nat.html" class="btn btn-neutral float-right" title="Nat Network" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="zfsintro.html" class="btn btn-neutral float-left" title="An Introduction To The ZFS File System(zfs) For Lunix" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Soda
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

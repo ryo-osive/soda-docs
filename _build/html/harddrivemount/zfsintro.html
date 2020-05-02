@@ -1,0 +1,234 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>An Introduction To The ZFS File System(zfs) For Lunix &mdash; Soda Foundation  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="ZFS Configuration" href="zfsconfig.html" />
+    <link rel="prev" title="From Hard Drive To Mount Point" href="lunixfile.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Soda Foundation
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../zfs/typeofraids/raid.html">Type Of RAIDs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lunixfile.html">From Hard Drive To Mount Point</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">An Introduction To The ZFS File System(zfs) For Lunix</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#endless-salability">Endless salability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#maximun-integrity">Maximun integrity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#drive-pooling">Drive pooling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#raid">RAID</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="zfsconfig.html">ZFS Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nat-network/nat.html">Nat Network</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Soda Foundation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>An Introduction To The ZFS File System(zfs) For Lunix</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/harddrivemount/zfsintro.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="an-introduction-to-the-zfs-file-system-zfs-for-lunix">
+<h1>An Introduction To The ZFS File System(zfs) For Lunix<a class="headerlink" href="#an-introduction-to-the-zfs-file-system-zfs-for-lunix" title="Permalink to this headline">¶</a></h1>
+<p>The z file system is a free &amp; open source logical volume manager built by SUN Microsystems for use in their Solaris operating system. Some of its most appealing features includes:</p>
+<div class="section" id="endless-salability">
+<h2>Endless salability<a class="headerlink" href="#endless-salability" title="Permalink to this headline">¶</a></h2>
+<p>It is a 128-bt file system that’s capable of managing zettabytes(one billion terabytes) of data. ano matters how much hard drive space you have, zfs will be suitable for managing it.</p>
+</div>
+<div class="section" id="maximun-integrity">
+<h2>Maximun integrity<a class="headerlink" href="#maximun-integrity" title="Permalink to this headline">¶</a></h2>
+<p>Everything one doees inside of ZFS uses a cheksun to ensure file integrity. One can rest assured that your file and their redudant copies will not encounter silent data corruption. Also, while ZFS is busy quitly checking your data for integrity, it will do automatic repairs anytime it can.</p>
+</div>
+<div class="section" id="drive-pooling">
+<h2>Drive pooling<a class="headerlink" href="#drive-pooling" title="Permalink to this headline">¶</a></h2>
+<p>The creator of ZFS want you to think of it as being similar to the way your computer uses RAM. When you need more memory in your computer, you put un another stick and you’re done. No need to spend time partitioning, formatting initializing, or doing anything else to your disks- when you need a bigegr storage “pool,” just add disks.</p>
+</div>
+<div class="section" id="raid">
+<h2>RAID<a class="headerlink" href="#raid" title="Permalink to this headline">¶</a></h2>
+<p>ZFS is capable of many different RAID levels, all while delivering performance that’s comparable to that of hardware RAID controller. This allows you to save money, makes setup easier, and have access to superiop RIAD levels that ZFS has improves upon.</p>
+<img alt="../_images/zfsintro.png" src="../_images/zfsintro.png" />
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>datreon@~ sudo apt update
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="zfsconfig.html" class="btn btn-neutral float-right" title="ZFS Configuration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="lunixfile.html" class="btn btn-neutral float-left" title="From Hard Drive To Mount Point" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Soda
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

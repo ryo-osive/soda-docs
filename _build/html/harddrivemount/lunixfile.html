@@ -1,0 +1,244 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>From Hard Drive To Mount Point &mdash; Soda Foundation  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="An Introduction To The ZFS File System(zfs) For Lunix" href="zfsintro.html" />
+    <link rel="prev" title="Type Of RAIDs" href="../zfs/typeofraids/raid.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Soda Foundation
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../zfs/typeofraids/raid.html">Type Of RAIDs</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">From Hard Drive To Mount Point</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#in-lunix-file-system">In Lunix File System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#in-zfs">In ZFS</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="zfsintro.html">An Introduction To The ZFS File System(zfs) For Lunix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zfsconfig.html">ZFS Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nat-network/nat.html">Nat Network</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Soda Foundation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>From Hard Drive To Mount Point</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/harddrivemount/lunixfile.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="from-hard-drive-to-mount-point">
+<h1>From Hard Drive To Mount Point<a class="headerlink" href="#from-hard-drive-to-mount-point" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="in-lunix-file-system">
+<h2>In Lunix File System<a class="headerlink" href="#in-lunix-file-system" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><img alt="../_images/lunix0.png" src="../_images/lunix0.png" />
+</div></blockquote>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>Prerequisites:-</p>
+<ul class="simple">
+<li>Install mdadm and lvm</li>
+</ul>
+<div class="last highlight-bash notranslate"><div class="highlight"><pre><span></span>example@~ sudo apt-get install madam
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="in-zfs">
+<h2>In ZFS<a class="headerlink" href="#in-zfs" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><img alt="../_images/zfs.png" src="../_images/zfs.png" />
+</div></blockquote>
+<p>Steps to be followed to export/import a zpool for <cite>SOLARIS/FREEBSD</cite> user.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li>Export a zpool</li>
+<li>zpool export datapool</li>
+<li>Import the exported pool. Check the imported pool</li>
+<li>zpool import</li>
+<li>zpool import geekpool.</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="zfsintro.html" class="btn btn-neutral float-right" title="An Introduction To The ZFS File System(zfs) For Lunix" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../zfs/typeofraids/raid.html" class="btn btn-neutral float-left" title="Type Of RAIDs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Soda
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
