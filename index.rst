@@ -30,5 +30,4 @@ Type Of RAIDs
    /creating-repo-github/repo-on-git 
    /creating-repo-github/link-git
    /netlify-doc/netlify
-
-
+   /3tier-arch/3tier
