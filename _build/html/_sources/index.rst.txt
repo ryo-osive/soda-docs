@@ -27,5 +27,8 @@ Type Of RAIDs
    /harddrivemount/zfsintro
    /harddrivemount/zfsconfig
    /nat-network/nat
+   /creating-repo-github/repo-on-git 
+   /creating-repo-github/link-git
+   /netlify-doc/netlify
 
 
