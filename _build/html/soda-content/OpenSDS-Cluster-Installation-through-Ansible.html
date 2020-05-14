@@ -1,0 +1,398 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>OpenSDS Install through Ansible &mdash; Soda Foundation  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="OpenSDS Project Screen Flow" href="Opensds-screen-flow.html" />
+    <link rel="prev" title="Nat Network" href="../contents/natNetwork.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Soda Foundation
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Primer</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contents/uploadExistingProjectToGit.html">Adding an existing project to GitHub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/deployToNetlify.html">Deploy ReadTheDocs on Netlify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/storagePrimer.html">Storage Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/sds.html">SDS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/natNetwork.html">Nat Network</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OpenSDS</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">OpenSDS Install through Ansible</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-install-an-opensds-local-cluster">1. How to install an OpenSDS local cluster</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pre-config-ubuntu-16-04">Pre-config (Ubuntu 16.04)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#download-opensds-installer-code">Download opensds-installer code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#install-ansible-tool">Install ansible tool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configure-opensds-install-variables">Configure opensds install variables</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#system-environment">System environment</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#set-host-ip-environment-variable">Set <code class="docutils literal notranslate"><span class="pre">HOST_IP</span></code> environment variable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#check-if-the-hosts-can-be-reached">Check if the hosts can be reached</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#run-opensds-ansible-playbook-to-start-deploy">Run opensds-ansible playbook to start deploy</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-test-opensds-cluster">2. How to test opensds cluster</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#opensds-cli">OpenSDS CLI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#opensds-ui">OpenSDS UI</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Opensds-screen-flow.html">OpenSDS Project Screen Flow</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Soda Foundation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>OpenSDS Install through Ansible</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/soda-content/OpenSDS-Cluster-Installation-through-Ansible.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="opensds-install-through-ansible">
+<h1>OpenSDS Install through Ansible<a class="headerlink" href="#opensds-install-through-ansible" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="how-to-install-an-opensds-local-cluster">
+<h2>1. How to install an OpenSDS local cluster<a class="headerlink" href="#how-to-install-an-opensds-local-cluster" title="Permalink to this headline">¶</a></h2>
+<p>This document describes how to install an SODA local cluster,
+including Hotpot, Gelato, Telemetry, Orchestration, and Dashboard
+components.</p>
+<div class="section" id="pre-config-ubuntu-16-04">
+<h3>Pre-config (Ubuntu 16.04)<a class="headerlink" href="#pre-config-ubuntu-16-04" title="Permalink to this headline">¶</a></h3>
+<p>All the installation work is tested on <code class="docutils literal notranslate"><span class="pre">Ubuntu</span> <span class="pre">16.04</span></code>, please make
+sure you have installed the right one. Also <code class="docutils literal notranslate"><span class="pre">root</span></code> user is REQUIRED
+before the installation work starts.</p>
+<ul>
+<li><p>Update the System and change user to root</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt update
+sudo su
+</pre></div>
+</div>
+<img alt="../_images/update-chng_user.png" src="../_images/update-chng_user.png" />
+</div></blockquote>
+</li>
+<li><p>packages</p></li>
+</ul>
+<p>Install following packages:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>apt-get update <span class="o">&amp;&amp;</span> apt-get install -y git make curl wget libltdl7 libseccomp2 libffi-dev gawk
+</pre></div>
+</div>
+<img alt="../_images/pkg-install.png" src="../_images/pkg-install.png" />
+</div></blockquote>
+<ul>
+<li><p>docker</p>
+<blockquote>
+<div><p>Install docker and docker compose:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#Add Docker’s official GPG key:</span>
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg <span class="p">|</span> sudo apt-key add -
+
+<span class="c1">#Update repository</span>
+sudo apt update
+
+<span class="c1"># Install Docker and Docker compose</span>
+sudo apt install docker-ce docker-compose
+</pre></div>
+</div>
+<img alt="../_images/docker-install.png" src="../_images/docker-install.png" />
+</div></blockquote>
+</li>
+<li><p>golang</p>
+<blockquote>
+<div><p>You can install golang by executing commands below:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget https://storage.googleapis.com/golang/go1.12.1.linux-amd64.tar.gz
+tar -C /usr/local -xzf go1.12.1.linux-amd64.tar.gz
+<span class="nb">echo</span> <span class="s1">&#39;export PATH=$PATH:/usr/local/go/bin&#39;</span> &gt;&gt; /etc/profile
+<span class="nb">echo</span> <span class="s1">&#39;export GOPATH=$HOME/gopath&#39;</span> &gt;&gt; /etc/profile
+<span class="nb">source</span> /etc/profile
+</pre></div>
+</div>
+<img alt="../_images/go-install.png" src="../_images/go-install.png" />
+<p>Check golang version information (v1.12.x):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>root@proxy:~# go version
+go version go1.12.1 linux/amd64
+</pre></div>
+</div>
+<img alt="../_images/go-version.png" src="../_images/go-version.png" />
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="download-opensds-installer-code">
+<h3>Download opensds-installer code<a class="headerlink" href="#download-opensds-installer-code" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/opensds/opensds-installer.git
+<span class="nb">cd</span> opensds-installer/ansible
+<span class="c1"># Checkout the latest stable release. Current stable release: stable/capri. If you want to get the master branch of all components, you can skip this step. (Attn: Master may not be stable or tested fully)</span>
+git checkout stable/capri
+</pre></div>
+</div>
+<img alt="../_images/down-opensds.png" src="../_images/down-opensds.png" />
+</div>
+<div class="section" id="install-ansible-tool">
+<h3>Install ansible tool<a class="headerlink" href="#install-ansible-tool" title="Permalink to this headline">¶</a></h3>
+<p>To install ansible, run the commands below:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># This step is needed to upgrade ansible to version 2.4.2 which is required for the &quot;include_tasks&quot; ansible command.</span>
+chmod +x ./install_ansible.sh <span class="o">&amp;&amp;</span> ./install_ansible.sh
+ansible --version <span class="c1"># Ansible version 2.4.x is required.</span>
+</pre></div>
+</div>
+<img alt="../_images/ansible1.png" src="../_images/ansible1.png" />
+<img alt="../_images/ansible2.png" src="../_images/ansible2.png" />
+</div>
+<div class="section" id="configure-opensds-install-variables">
+<h3>Configure opensds install variables<a class="headerlink" href="#configure-opensds-install-variables" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="system-environment">
+<h4>System environment<a class="headerlink" href="#system-environment" title="Permalink to this headline">¶</a></h4>
+<p>Firstly you need to modify <code class="docutils literal notranslate"><span class="pre">host_ip</span></code> in <code class="docutils literal notranslate"><span class="pre">group_vars/common.yml</span></code>, and
+you can specify which project (hotpot or gelato) to be deployed:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># This field indicates local machine host ip</span>
+<span class="nt">host_ip</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">127.0.0.1</span>
+
+<span class="c1"># This field indicates which project should be deploy</span>
+<span class="c1"># &#39;hotpot&#39;, &#39;gelato&#39; or &#39;all&#39;</span>
+<span class="nt">deploy_project</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">all</span>
+</pre></div>
+</div>
+<img alt="../_images/sys-enviro.png" src="../_images/sys-enviro.png" />
+</div>
+</div>
+<div class="section" id="set-host-ip-environment-variable">
+<h3>Set <code class="docutils literal notranslate"><span class="pre">HOST_IP</span></code> environment variable<a class="headerlink" href="#set-host-ip-environment-variable" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">HOST_IP</span></code> environment variable has to be set to your local machine
+IP address</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">HOST_IP</span><span class="o">={</span>your_real_host_ip<span class="o">}</span>
+<span class="nb">echo</span> <span class="nv">$HOST_IP</span>
+</pre></div>
+</div>
+<img alt="../_images/host-ip.png" src="../_images/host-ip.png" />
+</div>
+<div class="section" id="check-if-the-hosts-can-be-reached">
+<h3>Check if the hosts can be reached<a class="headerlink" href="#check-if-the-hosts-can-be-reached" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ansible all -m ping -i local.hosts
+</pre></div>
+</div>
+<img alt="../_images/host-reach.png" src="../_images/host-reach.png" />
+</div>
+<div class="section" id="run-opensds-ansible-playbook-to-start-deploy">
+<h3>Run opensds-ansible playbook to start deploy<a class="headerlink" href="#run-opensds-ansible-playbook-to-start-deploy" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ansible-playbook site.yml -i local.hosts
+<span class="c1"># You can use the -vvv option to enable verbose display and debug mode.</span>
+ansible-playbook site.yml -i local.hosts -vvv
+</pre></div>
+</div>
+<img alt="../_images/install-soda.png" src="../_images/install-soda.png" />
+</div>
+</div>
+<div class="section" id="how-to-test-opensds-cluster">
+<h2>2. How to test opensds cluster<a class="headerlink" href="#how-to-test-opensds-cluster" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="opensds-cli">
+<h3>OpenSDS CLI<a class="headerlink" href="#opensds-cli" title="Permalink to this headline">¶</a></h3>
+<p>Firstly configure opensds CLI tool:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo cp /opt/opensds-hotpot-linux-amd64/bin/osdsctl /usr/local/bin/
+
+<span class="nb">export</span> <span class="nv">OPENSDS_ENDPOINT</span><span class="o">=</span>http://<span class="o">{</span>your_real_host_ip<span class="o">}</span>:50040
+<span class="nb">export</span> <span class="nv">OPENSDS_AUTH_STRATEGY</span><span class="o">=</span>keystone
+<span class="nb">export</span> <span class="nv">OS_AUTH_URL</span><span class="o">=</span>http://<span class="o">{</span>your_real_host_ip<span class="o">}</span>/identity
+<span class="nb">export</span> <span class="nv">OS_USERNAME</span><span class="o">=</span>admin
+<span class="nb">export</span> <span class="nv">OS_PASSWORD</span><span class="o">=</span>opensds@123
+<span class="nb">export</span> <span class="nv">OS_TENANT_NAME</span><span class="o">=</span>admin
+<span class="nb">export</span> <span class="nv">OS_PROJECT_NAME</span><span class="o">=</span>admin
+<span class="nb">export</span> <span class="nv">OS_USER_DOMAIN_ID</span><span class="o">=</span>default
+
+osdsctl pool list <span class="c1"># Check if the pool resource is available</span>
+</pre></div>
+</div>
+<img alt="../_images/confg-soda_cli.png" src="../_images/confg-soda_cli.png" />
+<img alt="../_images/pool-list.png" src="../_images/pool-list.png" />
+</div>
+<div class="section" id="opensds-ui">
+<h3>OpenSDS UI<a class="headerlink" href="#opensds-ui" title="Permalink to this headline">¶</a></h3>
+<p>OpenSDS UI dashboard is available at <code class="docutils literal notranslate"><span class="pre">http://{your_host_ip}:8088</span></code>,
+please login the dashboard using the default admin credentials:
+<code class="docutils literal notranslate"><span class="pre">admin/opensds&#64;123</span></code>. Create <code class="docutils literal notranslate"><span class="pre">tenant</span></code>, <code class="docutils literal notranslate"><span class="pre">user</span></code>, and <code class="docutils literal notranslate"><span class="pre">profiles</span></code> as
+admin. Multi-Cloud service is also supported by dashboard.</p>
+<img alt="../_images/dashboard.png" src="../_images/dashboard.png" />
+<img alt="../_images/dash.png" src="../_images/dash.png" />
+<p>Logout of the dashboard as admin and login the dashboard again as a
+non-admin user to manage storage resource:</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Opensds-screen-flow.html" class="btn btn-neutral float-right" title="OpenSDS Project Screen Flow" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../contents/natNetwork.html" class="btn btn-neutral float-left" title="Nat Network" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Soda
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

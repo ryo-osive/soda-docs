@@ -1,0 +1,320 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Adding an existing project to GitHub &mdash; Soda Foundation  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Deploy ReadTheDocs on Netlify" href="deployToNetlify.html" />
+    <link rel="prev" title="Soda Foundation Documentation" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Soda Foundation
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Primer</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Adding an existing project to GitHub</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#using-the-command-line">Using the command line</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#open-your-project-in-the-respective-code-editor">Open Your project in the respective Code Editor.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#open-terminal-in-code-editor">Open Terminal in code editor.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#initialize-the-local-directory-as-a-git-repository">Initialize the local directory as a Git repository.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#add-the-files-in-your-new-local-repository-this-stages-them-for-the-first-commit">Add the files in your new local repository. This stages them for the first commit.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#commit-the-files-that-you-ve-staged-in-your-local-repository">Commit the files that you’ve staged in your local repository.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#at-the-top-of-your-github-repository-s-quick-setup-page-click-to-copy-the-remote-repository-url">At the top of your GitHub repository’s Quick Setup page, click  to copy the remote repository URL.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#in-terminal-add-the-url-for-the-remote-repository-where-your-local-repository-will-be-pushed">In Terminal, add the <strong>URL for the remote repository</strong> where your local repository will be pushed.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#push-the-changes-in-your-local-repository-to-github">Push the changes in your local repository to GitHub.</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#importing-source-code-to-github">Importing Source Code TO Github.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#creating-a-new-repository">Creating a new repository</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="deployToNetlify.html">Deploy ReadTheDocs on Netlify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="storagePrimer.html">Storage Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sds.html">SDS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="natNetwork.html">Nat Network</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OpenSDS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../soda-content/OpenSDS-Cluster-Installation-through-Ansible.html">OpenSDS Install through Ansible</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../soda-content/Opensds-screen-flow.html">OpenSDS Project Screen Flow</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Soda Foundation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Adding an existing project to GitHub</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/contents/uploadExistingProjectToGit.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="adding-an-existing-project-to-github">
+<h1>Adding an existing project to GitHub<a class="headerlink" href="#adding-an-existing-project-to-github" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="using-the-command-line">
+<h2>Using the command line<a class="headerlink" href="#using-the-command-line" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="open-your-project-in-the-respective-code-editor">
+<h3>Open Your project in the respective Code Editor.<a class="headerlink" href="#open-your-project-in-the-respective-code-editor" title="Permalink to this headline">¶</a></h3>
+<img alt="../_images/git5.png" src="../_images/git5.png" />
+</div>
+<div class="section" id="open-terminal-in-code-editor">
+<h3>Open Terminal in code editor.<a class="headerlink" href="#open-terminal-in-code-editor" title="Permalink to this headline">¶</a></h3>
+<img alt="../_images/git6.png" src="../_images/git6.png" />
+</div>
+<div class="section" id="initialize-the-local-directory-as-a-git-repository">
+<h3>Initialize the local directory as a Git repository.<a class="headerlink" href="#initialize-the-local-directory-as-a-git-repository" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git init
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="add-the-files-in-your-new-local-repository-this-stages-them-for-the-first-commit">
+<h3>Add the files in your new local repository. This stages them for the first commit.<a class="headerlink" href="#add-the-files-in-your-new-local-repository-this-stages-them-for-the-first-commit" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git add .
+<span class="c1"># Adds the files in the local repository and stages them for commit. To unstage a file, use &#39;git reset HEAD YOUR-FILE&#39;.</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Name any specific directory after example:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git add. _build -f
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="commit-the-files-that-you-ve-staged-in-your-local-repository">
+<h3>Commit the files that you’ve staged in your local repository.<a class="headerlink" href="#commit-the-files-that-you-ve-staged-in-your-local-repository" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git commit -m <span class="s2">&quot;First commit&quot;</span>
+<span class="c1"># Commits the tracked changes and prepares them to be pushed to a remote repository. To remove this commit and modify the file, use &#39;git reset --soft HEAD~1&#39; and commit and add the file again.</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="at-the-top-of-your-github-repository-s-quick-setup-page-click-to-copy-the-remote-repository-url">
+<h3>At the top of your GitHub repository’s Quick Setup page, click  to copy the remote repository URL.<a class="headerlink" href="#at-the-top-of-your-github-repository-s-quick-setup-page-click-to-copy-the-remote-repository-url" title="Permalink to this headline">¶</a></h3>
+<img alt="../_images/git7.png" src="../_images/git7.png" />
+</div>
+<div class="section" id="in-terminal-add-the-url-for-the-remote-repository-where-your-local-repository-will-be-pushed">
+<h3>In Terminal, add the <strong>URL for the remote repository</strong> where your local repository will be pushed.<a class="headerlink" href="#in-terminal-add-the-url-for-the-remote-repository-where-your-local-repository-will-be-pushed" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git remote add origin remote repository URL
+<span class="c1"># Sets the new remote</span>
+$ git remote -v
+<span class="c1"># Verifies the new remote URL</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="push-the-changes-in-your-local-repository-to-github">
+<h3>Push the changes in your local repository to GitHub.<a class="headerlink" href="#push-the-changes-in-your-local-repository-to-github" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git push origin master
+<span class="c1"># Pushes the changes in your local repository up to the remote repository you specified as the origin</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="importing-source-code-to-github">
+<h2>Importing Source Code TO Github.<a class="headerlink" href="#importing-source-code-to-github" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="creating-a-new-repository">
+<h2>Creating a new repository<a class="headerlink" href="#creating-a-new-repository" title="Permalink to this headline">¶</a></h2>
+<p>You can create a new repository on your personal account or any organization where you have sufficient permissions.</p>
+<ol class="arabic simple">
+<li><p>In the upper-right corner of any page, use the  drop-down menu, and select <strong>New repository</strong>.</p></li>
+</ol>
+<img alt="../_images/git1.png" src="../_images/git1.png" />
+<ol class="arabic simple">
+<li><p>Select the account you wish to create the repository on. Type a name for your repository, and an optional description.</p></li>
+</ol>
+<img alt="../_images/git2.png" src="../_images/git2.png" />
+<ol class="arabic simple">
+<li><p>Choose a repository visbility &amp; click on <strong>Creating repository…</strong></p></li>
+</ol>
+<img alt="../_images/git3.png" src="../_images/git3.png" />
+<ol class="arabic simple">
+<li><p>Repository is ready to use.</p></li>
+</ol>
+<img alt="../_images/git4.png" src="../_images/git4.png" />
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="deployToNetlify.html" class="btn btn-neutral float-right" title="Deploy ReadTheDocs on Netlify" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../index.html" class="btn btn-neutral float-left" title="Soda Foundation Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Soda
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

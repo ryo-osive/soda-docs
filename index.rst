@@ -3,31 +3,25 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Type Of RAIDs
-=============
-   * RAID 0 (Striping without parity)
-   * RAID 0 (Striping without parity)
-   * RAID 4 (Parity)
-   * RAID 5 (Disk Striping with parity)
-   * RAID 6 (Parity with disk)
-   * RAID 10 (Mirror and Stripe)
-
-   
+Soda Foundation Documentation
+++++++++++++++++++++++++++++++
 
 
+.. toctree::
+   :maxdepth: 3
+   :hidden:
+   :caption: Primer
+
+   /contents/uploadExistingProjectToGit
+   /contents/deployToNetlify
+   /contents/storagePrimer
+   /contents/sds
+   /contents/natNetwork
 
 .. toctree::
    :maxdepth: 2
    :hidden:
-   :caption: Contents:
+   :caption: OpenSDS
 
-
-   /zfs/typeofraids/raid
-   /harddrivemount/lunixfile
-   /harddrivemount/zfsintro
-   /harddrivemount/zfsconfig
-   /nat-network/nat
-   /creating-repo-github/repo-on-git 
-   /creating-repo-github/link-git
-   /netlify-doc/netlify
-   /3tier-arch/3tier
+   /soda-content/OpenSDS-Cluster-Installation-through-Ansible
+   /soda-content/Opensds-screen-flow

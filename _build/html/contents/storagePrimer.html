@@ -1,0 +1,468 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Storage Primer &mdash; Soda Foundation  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="SDS" href="sds.html" />
+    <link rel="prev" title="Deploy ReadTheDocs on Netlify" href="deployToNetlify.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Soda Foundation
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Primer</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="uploadExistingProjectToGit.html">Adding an existing project to GitHub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployToNetlify.html">Deploy ReadTheDocs on Netlify</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Storage Primer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#tier-architecture">3 Tier Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#type-of-raids">Type Of RAIDs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#raid-0-striping-without-parity">RAID 0 (Striping without parity)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#raid-1-disk-mirroring">RAID 1 (Disk mirroring)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#raid-4-parity">RAID 4 (Parity)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#raid-5-disk-striping-with-parity">RAID 5 (Disk Striping with parity)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#raid-6-parity-with-disk">RAID 6 (Parity with disk)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#raid-10-mirror-and-stripe">RAID 10 (Mirror and Stripe)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#from-hard-drive-to-mount-point">From Hard Drive To Mount Point</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#in-linux-file-system">In Linux File System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#in-zfs">In ZFS</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#zfs-configuration">ZFS Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#an-introduction-to-the-zfs-file-system-zfs-for-linux">An Introduction To The ZFS File System(zfs) For Linux</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#endless-scalability">Endless scalability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#maximum-integrity">Maximum integrity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#drive-pooling">Drive pooling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#raid">RAID</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#lvm">LVM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nfs">NFS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#iscsi">ISCSI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#hdfs">HDFS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#object-store-s3-minio">Object Store (S3/Minio)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ceph">CEPH</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#docker-volumes">Docker Volumes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#k8s-storage-options">K8s storage options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#vmware">Vmware</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#openstack">OpenStack</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sds.html">SDS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="natNetwork.html">Nat Network</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OpenSDS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../soda-content/OpenSDS-Cluster-Installation-through-Ansible.html">OpenSDS Install through Ansible</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../soda-content/Opensds-screen-flow.html">OpenSDS Project Screen Flow</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Soda Foundation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Storage Primer</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/contents/storagePrimer.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="storage-primer">
+<h1>Storage Primer<a class="headerlink" href="#storage-primer" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="tier-architecture">
+<h2>3 Tier Architecture<a class="headerlink" href="#tier-architecture" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><img alt="../_images/3-tier.png" src="../_images/3-tier.png" />
+</div></blockquote>
+</div>
+<div class="section" id="type-of-raids">
+<h2>Type Of RAIDs<a class="headerlink" href="#type-of-raids" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="raid-0-striping-without-parity">
+<h3>RAID 0 (Striping without parity)<a class="headerlink" href="#raid-0-striping-without-parity" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><img alt="../_images/raid0.png" src="../_images/raid0.png" />
+</div></blockquote>
+</div>
+<div class="section" id="raid-1-disk-mirroring">
+<h3>RAID 1 (Disk mirroring)<a class="headerlink" href="#raid-1-disk-mirroring" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><img alt="../_images/raid1.png" src="../_images/raid1.png" />
+</div></blockquote>
+</div>
+<div class="section" id="raid-4-parity">
+<h3>RAID 4 (Parity)<a class="headerlink" href="#raid-4-parity" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="raid-5-disk-striping-with-parity">
+<h3>RAID 5 (Disk Striping with parity)<a class="headerlink" href="#raid-5-disk-striping-with-parity" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><img alt="../_images/raid2.png" src="../_images/raid2.png" />
+</div></blockquote>
+</div>
+<div class="section" id="raid-6-parity-with-disk">
+<h3>RAID 6 (Parity with disk)<a class="headerlink" href="#raid-6-parity-with-disk" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><img alt="../_images/raid3.png" src="../_images/raid3.png" />
+</div></blockquote>
+</div>
+<div class="section" id="raid-10-mirror-and-stripe">
+<h3>RAID 10 (Mirror and Stripe)<a class="headerlink" href="#raid-10-mirror-and-stripe" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><img alt="../_images/raid4.png" src="../_images/raid4.png" />
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="from-hard-drive-to-mount-point">
+<h2>From Hard Drive To Mount Point<a class="headerlink" href="#from-hard-drive-to-mount-point" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="in-linux-file-system">
+<h3>In Linux File System<a class="headerlink" href="#in-linux-file-system" title="Permalink to this headline">¶</a></h3>
+<img alt="../_images/lunix0.png" src="../_images/lunix0.png" />
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Prerequisites:-</p>
+<ul class="simple">
+<li><p>Install mdadm and lvm</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>example@~ sudo apt-get install madam
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="in-zfs">
+<h3>In ZFS<a class="headerlink" href="#in-zfs" title="Permalink to this headline">¶</a></h3>
+<img alt="../_images/zfs.png" src="../_images/zfs.png" />
+<p>Steps to be followed to export/import a zpool for <cite>SOLARIS/FREEBSD</cite> user.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>Export a zpool</p></li>
+<li><p>zpool export datapool</p></li>
+<li><p>Import the exported pool. Check the imported pool</p></li>
+<li><p>zpool import</p></li>
+<li><p>zpool import geekpool.</p></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="zfs-configuration">
+<h2>ZFS Configuration<a class="headerlink" href="#zfs-configuration" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p>First set up ZFS by installing it:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>example@example~ sudo apt-get repository ppa:zfs-native/stable
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Now run the following command:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>example@example~ sudo apt update
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Finally install file system by command:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>example@example~ sudo apt-get install -y ubuntu-zfs
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>The ZFS module are not loaded. Try running ‘/sbin/modprobe zfs’ as a root to load them:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>example@example~ sudo /sbin/modprobe zfs
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Start by taking two of our hard disks and putting them in a storage pool by running the following command:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>example@example~ sudo zpool create -f datapool /devs/sdb /dev /sdc
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>zpool create is the command used to create a new storage pool, -f overrides any error that occur(such as if the disk(s) already have information on them), datapool is the name of the storage pool, and /dev/sdb /dev /sdc are the hard drive we put in the pool.</p>
+</div>
+</div></blockquote>
+</li>
+<li><p>Run df -h check the zpool is created or not:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>example@example~ df -h
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Check status:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>example@example~ sudo zpool status
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Create a dataset:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>example@example~ sudo zfs create datapool/datreon
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Set mountpoint by using following command:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>example@example~ Sudo zfs <span class="nb">set</span> <span class="nv">mountpoint</span><span class="o">=</span>/home/datreon datapool/datreon
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Add user to the system by following command:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>example@example~ sudo useradd -d /home/datreon -s /bin/bash/datreon datreon
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Change ownership the command:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>example@example~ sudo chown -R datreon:datreon /home/datreon
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Set desired password:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>example@example~ sudo password
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="an-introduction-to-the-zfs-file-system-zfs-for-linux">
+<h2>An Introduction To The ZFS File System(zfs) For Linux<a class="headerlink" href="#an-introduction-to-the-zfs-file-system-zfs-for-linux" title="Permalink to this headline">¶</a></h2>
+<p>The z file system is a free &amp; open source logical volume manager built by SUN Microsystems for use in their Solaris operating system. Some of its most appealing features includes:</p>
+<div class="section" id="endless-scalability">
+<h3>Endless scalability<a class="headerlink" href="#endless-scalability" title="Permalink to this headline">¶</a></h3>
+<p>It is a 128-bt file system that’s capable of managing zettabytes(one billion terabytes) of data. ano matters how much hard drive space you have, zfs will be suitable for managing it.</p>
+</div>
+<div class="section" id="maximum-integrity">
+<h3>Maximum integrity<a class="headerlink" href="#maximum-integrity" title="Permalink to this headline">¶</a></h3>
+<p>Everything one doees inside of ZFS uses a cheksun to ensure file integrity. One can rest assured that your file and their redudant copies will not encounter silent data corruption. Also, while ZFS is busy quitly checking your data for integrity, it will do automatic repairs anytime it can.</p>
+</div>
+<div class="section" id="drive-pooling">
+<h3>Drive pooling<a class="headerlink" href="#drive-pooling" title="Permalink to this headline">¶</a></h3>
+<p>The creator of ZFS want you to think of it as being similar to the way your computer uses RAM. When you need more memory in your computer, you put un another stick and you’re done. No need to spend time partitioning, formatting initializing, or doing anything else to your disks- when you need a bigegr storage “pool,” just add disks.</p>
+</div>
+<div class="section" id="raid">
+<h3>RAID<a class="headerlink" href="#raid" title="Permalink to this headline">¶</a></h3>
+<p>ZFS is capable of many different RAID levels, all while delivering performance that’s comparable to that of hardware RAID controller. This allows you to save money, makes setup easier, and have access to superiop RIAD levels that ZFS has improves upon.</p>
+<img alt="../_images/zfsintro.png" src="../_images/zfsintro.png" />
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>datreon@~ sudo apt update
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="lvm">
+<h2>LVM<a class="headerlink" href="#lvm" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="nfs">
+<h2>NFS<a class="headerlink" href="#nfs" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="iscsi">
+<h2>ISCSI<a class="headerlink" href="#iscsi" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="hdfs">
+<h2>HDFS<a class="headerlink" href="#hdfs" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="object-store-s3-minio">
+<h2>Object Store (S3/Minio)<a class="headerlink" href="#object-store-s3-minio" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="ceph">
+<h2>CEPH<a class="headerlink" href="#ceph" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="docker-volumes">
+<h2>Docker Volumes<a class="headerlink" href="#docker-volumes" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="k8s-storage-options">
+<h2>K8s storage options<a class="headerlink" href="#k8s-storage-options" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="vmware">
+<h2>Vmware<a class="headerlink" href="#vmware" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="openstack">
+<h2>OpenStack<a class="headerlink" href="#openstack" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="sds.html" class="btn btn-neutral float-right" title="SDS" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="deployToNetlify.html" class="btn btn-neutral float-left" title="Deploy ReadTheDocs on Netlify" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Soda
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
