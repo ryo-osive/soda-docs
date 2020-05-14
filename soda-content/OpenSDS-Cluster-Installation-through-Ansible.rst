@@ -81,10 +81,10 @@ Download opensds-installer code
 
     .. code:: bash
 
-        git clone https://github.com/opensds/opensds-installer.git
+        git clone https://github.com/sodafoundation/installer.git
         cd opensds-installer/ansible
         # Checkout the latest stable release. Current stable release: stable/capri. If you want to get the master branch of all components, you can skip this step. (Attn: Master may not be stable or tested fully)
-        git checkout stable/capri
+        git checkout v0.12.0
 
     .. image:: /soda-content/img/down-opensds.png
 
@@ -114,10 +114,9 @@ you can specify which project (hotpot or gelato) to be deployed:
     .. code:: yaml
 
         # This field indicates local machine host ip
-        host_ip: 127.0.0.1
+        host_ip: {your_real_host_ip}
 
         # This field indicates which project should be deploy
-        # 'hotpot', 'gelato' or 'all'
         deploy_project: all
 
     .. image:: /soda-content/img/sys-enviro.png
