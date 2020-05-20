@@ -76,7 +76,7 @@ Install following packages:
     .. image:: /soda-content/img/go-version.png
 
 
-Download opensds-installer code
+Download Soda-installer code
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     .. code:: bash
