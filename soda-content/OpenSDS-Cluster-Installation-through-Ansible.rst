@@ -88,7 +88,7 @@ Download Soda-installer code
     .. code:: bash
 
         git clone https://github.com/sodafoundation/installer.git
-        cd opensds-installer/ansible
+        cd installer/ansible
         # Checkout the latest stable release. Current stable release: stable/capri. If you want to get the master branch of all components, you can skip this step. (Attn: Master may not be stable or tested fully)
         git checkout v0.12.0
 
